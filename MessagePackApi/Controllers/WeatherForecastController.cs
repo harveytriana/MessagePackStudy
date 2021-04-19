@@ -2,9 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MessagePackApi.Controllers
 {
@@ -12,10 +10,11 @@ namespace MessagePackApi.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
+        static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
+        static readonly Random random = new();
 
         private readonly ILogger<WeatherForecastController> _logger;
 
@@ -27,13 +26,11 @@ namespace MessagePackApi.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast {
                 Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+                TemperatureC = random.Next(-20, 55),
+                Summary = Summaries[random.Next(Summaries.Length)]
+            });
         }
 
         [HttpGet("{id}")]
@@ -46,14 +43,8 @@ namespace MessagePackApi.Controllers
             };
         }
 
-        //[HttpPost]
-        //public void Post_T(WeatherForecast value)
-        //{
-        //    _logger.LogInformation($"{value.Date:dd-MM-yy HH:m:ss} {value.TemperatureC:N2} {value.Summary}");
-        //}
-
         [HttpPost]
-        public void Post(string value)
+        public void Post(WeatherForecast value)
         {
             _logger.LogInformation($"Post argument: {value}");
         }

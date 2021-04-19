@@ -2,17 +2,10 @@ using MessagePack.AspNetCoreMvcFormatter;
 using MessagePack.Resolvers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 // https://dotnetthoughts.net/using-message-pack-with-asp-net-core/
 // https://www.strathweb.com/2017/06/using-messagepack-with-asp-net-core-mvc/
@@ -40,7 +33,7 @@ namespace MessagePackApi
 
             services.AddControllers();
             services.AddSwaggerGen(c => {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MessagePackApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API Tests", Version = "v1" });
             });
         }
 

@@ -16,7 +16,9 @@ namespace ConsoleClient
             Console.WriteLine("Hello MessagePack!");
             Console.WriteLine("Press any key when server is ready.");
             Console.ReadKey();
-            //GetData();
+            
+            GetData();
+            
             PostData();
 
             //GetOne();
@@ -62,7 +64,7 @@ namespace ConsoleClient
 
             var buffer = MessagePackSerializer.Serialize(item, ContractlessStandardResolver.Options);
             var byteContent = new ByteArrayContent(buffer);
-
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/x-msgpack");
             var result = httpClient.PostAsync("WeatherForecast", byteContent).Result;
 
             Console.WriteLine("\nResult: {0}", result.StatusCode);
