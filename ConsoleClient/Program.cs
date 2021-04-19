@@ -16,9 +16,9 @@ namespace ConsoleClient
             Console.WriteLine("Hello MessagePack!");
             Console.WriteLine("Press any key when server is ready.");
             Console.ReadKey();
-            
+
             GetData();
-            
+
             PostData();
 
             //GetOne();
@@ -27,38 +27,31 @@ namespace ConsoleClient
         private static void GetData()
         {
             Console.WriteLine("\nGET");
-            using var httpClient = new HttpClient(); 
+            using var httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(_apiRoot);
             var result = httpClient.GetAsync("WeatherForecast").Result;
             var bytes = result.Content.ReadAsByteArrayAsync().Result;
-
             var data = MessagePackSerializer.Deserialize<List<WeatherForecast>>(bytes, ContractlessStandardResolver.Options);
 
-            data.ForEach(x => {
-                Console.WriteLine($"{x.Date:dd-MM-yy HH:m:ss} {x.TemperatureC:N2} {x.Summary}");
-            });
+            data.ForEach(item => Console.WriteLine(item));
         }
 
         private static void GetOne()
         {
-            Console.WriteLine("\nGET");
+            Console.WriteLine("\nGET/1");
             using var httpClient = new HttpClient(); httpClient.BaseAddress = new Uri(_apiRoot);
+
             var result = httpClient.GetAsync("WeatherForecast/1").Result;
             var bytes = result.Content.ReadAsByteArrayAsync().Result;
+            var item = MessagePackSerializer.Deserialize<WeatherForecast>(bytes, ContractlessStandardResolver.Options);
 
-            var x = MessagePackSerializer.Deserialize<WeatherForecast>(bytes, ContractlessStandardResolver.Options);
-
-            Console.WriteLine($"{x.Date:dd-MM-yy HH:m:ss} {x.TemperatureC:N2} {x.Summary}");
+            Console.WriteLine(item);
         }
 
         private static void PostData()
         {
             Console.WriteLine("\nPOST");
-            var item = new WeatherForecast {
-                Date = DateTime.Now,
-                TemperatureC = 17 + 1,
-                Summary = "Cool in London"
-            };
+            var item = new WeatherForecast(DateTime.Now, 17 + 1, "Cool in London");
 
             using var httpClient = new HttpClient(); httpClient.BaseAddress = new Uri(_apiRoot);
 
@@ -71,11 +64,5 @@ namespace ConsoleClient
         }
     }
 
-    // public record WeatherForecast(DateTime Date, int TemperatureC, string Summary);
-    public class WeatherForecast
-    {
-        public DateTime Date { get; set; }
-        public int TemperatureC { get; set; }
-        public string Summary { get; set; }
-    }
+    public record WeatherForecast(DateTime Date, int TemperatureC, string Summary);
 }

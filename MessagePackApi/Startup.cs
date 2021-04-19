@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
+// Good approach
 // https://dotnetthoughts.net/using-message-pack-with-asp-net-core/
 // https://www.strathweb.com/2017/06/using-messagepack-with-asp-net-core-mvc/
 
@@ -21,7 +22,6 @@ namespace MessagePackApi
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().AddMvcOptions(option => {
