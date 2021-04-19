@@ -6,7 +6,10 @@
 
   <ItemGroup>
     <PackageReference Include="MessagePack.AspNetCoreMvcFormatter" Version="2.2.85" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\index.html" />
   </ItemGroup>
 
 </Project>
