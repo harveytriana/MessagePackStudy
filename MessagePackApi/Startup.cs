@@ -10,6 +10,7 @@ using System.Collections.Generic;
 // Good approach
 // https://dotnetthoughts.net/using-message-pack-with-asp-net-core/
 // https://www.strathweb.com/2017/06/using-messagepack-with-asp-net-core-mvc/
+// https://dotnet.libhunt.com/messagepack-csharp-alternatives
 
 namespace MessagePackApi
 {
