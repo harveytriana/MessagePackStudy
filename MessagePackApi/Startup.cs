@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 // https://dotnetthoughts.net/using-message-pack-with-asp-net-core/
+// https://www.strathweb.com/2017/06/using-messagepack-with-asp-net-core-mvc/
 
 namespace MessagePackApi
 {

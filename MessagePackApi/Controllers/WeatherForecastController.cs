@@ -36,10 +36,26 @@ namespace MessagePackApi.Controllers
             .ToArray();
         }
 
-        [HttpPost]
-        public void Post([FromBody] WeatherForecast item)
+        [HttpGet("{id}")]
+        public WeatherForecast Get(int id)
         {
-            _logger.LogInformation($"{item.Date:dd-MM-yy HH:m:ss} {item.TemperatureC:N2} {item.Summary}");
+            return new WeatherForecast {
+                Date = DateTime.Now,
+                TemperatureC = 17 + id,
+                Summary = "Cool in London"
+            };
+        }
+
+        //[HttpPost]
+        //public void Post_T(WeatherForecast value)
+        //{
+        //    _logger.LogInformation($"{value.Date:dd-MM-yy HH:m:ss} {value.TemperatureC:N2} {value.Summary}");
+        //}
+
+        [HttpPost]
+        public void Post(string value)
+        {
+            _logger.LogInformation($"Post argument: {value}");
         }
     }
 }
