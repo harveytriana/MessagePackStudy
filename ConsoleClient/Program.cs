@@ -49,7 +49,7 @@ namespace ConsoleClient
         private static void PostData()
         {
             Console.WriteLine("\nPOST");
-            var item = new WeatherForecast(DateTime.Now, 17 + 1, "Cool in London");
+            var item = new WeatherForecast(DateTime.Now, 17, "Cool in Bogotá");
 
             using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
             var buffer = MessagePackSerializer.Serialize(item, ContractlessStandardResolver.Options);
