@@ -9,26 +9,25 @@ namespace ConsoleClient
 {
     class Program
     {
+        //! Run Multiple startup projects. 
+
         static readonly string _apiRoot = "https://localhost:44335/";
 
         static void Main()
         {
             Console.WriteLine("Hello MessagePack!");
-            Console.WriteLine("Press any key when server is ready.");
+            Console.WriteLine($"Press any key when server {_apiRoot} is ready.");
             Console.ReadKey();
 
             GetData();
-
+            GetData(1);
             PostData();
-
-            //GetOne();
         }
 
         private static void GetData()
         {
             Console.WriteLine("\nGET");
-            using var httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(_apiRoot);
+            using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
             var result = httpClient.GetAsync("WeatherForecast").Result;
             var bytes = result.Content.ReadAsByteArrayAsync().Result;
             var data = MessagePackSerializer.Deserialize<List<WeatherForecast>>(bytes, ContractlessStandardResolver.Options);
@@ -36,12 +35,11 @@ namespace ConsoleClient
             data.ForEach(item => Console.WriteLine(item));
         }
 
-        private static void GetOne()
+        private static void GetData(int id)
         {
-            Console.WriteLine("\nGET/1");
-            using var httpClient = new HttpClient(); httpClient.BaseAddress = new Uri(_apiRoot);
-
-            var result = httpClient.GetAsync("WeatherForecast/1").Result;
+            Console.WriteLine($"\nGET/{id}");
+            using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
+            var result = httpClient.GetAsync($"WeatherForecast/{id}").Result;
             var bytes = result.Content.ReadAsByteArrayAsync().Result;
             var item = MessagePackSerializer.Deserialize<WeatherForecast>(bytes, ContractlessStandardResolver.Options);
 
@@ -53,8 +51,7 @@ namespace ConsoleClient
             Console.WriteLine("\nPOST");
             var item = new WeatherForecast(DateTime.Now, 17 + 1, "Cool in London");
 
-            using var httpClient = new HttpClient(); httpClient.BaseAddress = new Uri(_apiRoot);
-
+            using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
             var buffer = MessagePackSerializer.Serialize(item, ContractlessStandardResolver.Options);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/x-msgpack");
