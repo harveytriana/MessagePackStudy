@@ -1,3 +1,6 @@
+// =============================
+// BlazorSpread.net Sample
+// =============================
 using MessagePack.AspNetCoreMvcFormatter;
 using MessagePack.Resolvers;
 using Microsoft.AspNetCore.Builder;

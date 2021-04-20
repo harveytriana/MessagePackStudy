@@ -42,7 +42,7 @@ namespace MessagePackApi.Controllers
             return new WeatherForecast {
                 Date = DateTime.Now,
                 TemperatureC = 17 + id,
-                Summary = "Cool in London"
+                Summary = "Cool in Bogotá"
             };
         }
 

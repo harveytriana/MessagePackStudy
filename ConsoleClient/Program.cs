@@ -10,6 +10,8 @@ using System.Net.Http.Headers;
 
 namespace ConsoleClient
 {
+    public record WeatherForecast(DateTime Date, int TemperatureC, string Summary);
+
     class Program
     {
         //! Run Multiple startup projects. 
@@ -69,6 +71,4 @@ namespace ConsoleClient
             Console.WriteLine("\nResult: {0}", result.StatusCode);
         }
     }
-
-    public record WeatherForecast(DateTime Date, int TemperatureC, string Summary);
 }
