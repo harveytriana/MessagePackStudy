@@ -10,6 +10,8 @@ namespace MessagePackApi
 {
     public class Startup
     {
+        readonly string _CorsPolicy = "CorsPolicy";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +30,18 @@ namespace MessagePackApi
             });
 
             services.AddControllers();
+
+            // CORS to allow Blazor client or others
+            services.AddCors(options => {
+                options.AddPolicy(name: _CorsPolicy,
+                    builder => {
+                        builder.WithOrigins("https://localhost:44342/")
+                               .AllowAnyHeader()
+                               .AllowCredentials()
+                               .AllowAnyMethod()
+                               .SetIsOriginAllowedToAllowWildcardSubdomains();
+                    });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +56,7 @@ namespace MessagePackApi
             app.UseAuthorization();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseCors(_CorsPolicy);
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
