@@ -38,7 +38,7 @@ namespace MessagePackApi
             services.AddCors(options => {
                 options.AddPolicy(name: _CorsPolicy,
                     builder => {
-                        builder.WithOrigins("https://localhost:44342/")
+                        builder.WithOrigins("https://localhost:44342")
                                .AllowAnyHeader()
                                .AllowCredentials()
                                .AllowAnyMethod()
@@ -54,12 +54,12 @@ namespace MessagePackApi
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors(_CorsPolicy);
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseCors(_CorsPolicy);
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
