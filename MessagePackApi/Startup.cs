@@ -38,11 +38,8 @@ namespace MessagePackApi
             }
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
