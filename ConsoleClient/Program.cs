@@ -26,6 +26,8 @@ namespace ConsoleClient
             Console.WriteLine("Hello MessagePack!");
             Console.WriteLine($"Press any key when server {_apiRoot} is ready.");
             Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Console Client");
 
             GetData();
             GetData(1);
