@@ -1,4 +1,7 @@
-﻿using MessagePack;
+﻿// =============================
+// BlazorSpread.net Sample
+// =============================
+using MessagePack;
 using MessagePack.Resolvers;
 using System;
 using System.Collections.Generic;
@@ -11,7 +14,10 @@ namespace ConsoleClient
     {
         //! Run Multiple startup projects. 
 
+        // asp.net core url
         static readonly string _apiRoot = "https://localhost:44335/";
+
+        const string MEDIA_TYPE = "application/x-msgpack";
 
         static void Main()
         {
@@ -27,8 +33,9 @@ namespace ConsoleClient
         private static void GetData()
         {
             Console.WriteLine("\nGET");
+
             using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
-            var result = httpClient.GetAsync("WeatherForecast").Result;
+            var result = httpClient.GetAsync("api/WeatherForecast").Result;
             var bytes = result.Content.ReadAsByteArrayAsync().Result;
             var data = MessagePackSerializer.Deserialize<List<WeatherForecast>>(bytes, ContractlessStandardResolver.Options);
 
@@ -38,8 +45,9 @@ namespace ConsoleClient
         private static void GetData(int id)
         {
             Console.WriteLine($"\nGET/{id}");
+
             using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
-            var result = httpClient.GetAsync($"WeatherForecast/{id}").Result;
+            var result = httpClient.GetAsync($"api/WeatherForecast/{id}").Result;
             var bytes = result.Content.ReadAsByteArrayAsync().Result;
             var item = MessagePackSerializer.Deserialize<WeatherForecast>(bytes, ContractlessStandardResolver.Options);
 
@@ -49,13 +57,14 @@ namespace ConsoleClient
         private static void PostData()
         {
             Console.WriteLine("\nPOST");
+            // post object
             var item = new WeatherForecast(DateTime.Now, 17, "Cool in Bogotá");
 
             using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
             var buffer = MessagePackSerializer.Serialize(item, ContractlessStandardResolver.Options);
             var byteContent = new ByteArrayContent(buffer);
-            byteContent.Headers.ContentType = new MediaTypeHeaderValue("application/x-msgpack");
-            var result = httpClient.PostAsync("WeatherForecast", byteContent).Result;
+            byteContent.Headers.ContentType = new MediaTypeHeaderValue(MEDIA_TYPE);
+            var result = httpClient.PostAsync("api/WeatherForecast", byteContent).Result;
 
             Console.WriteLine("\nResult: {0}", result.StatusCode);
         }
