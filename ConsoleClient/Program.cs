@@ -17,14 +17,14 @@ namespace ConsoleClient
         //! Run Multiple startup projects. 
 
         // asp.net core url
-        static readonly string _apiRoot = "https://localhost:44335/";
+        const string APIROOT = "https://localhost:44321/";
 
         const string MEDIA_TYPE = "application/x-msgpack";
 
         static void Main()
         {
             Console.WriteLine("Hello MessagePack!");
-            Console.WriteLine($"Press any key when server {_apiRoot} is ready.");
+            Console.WriteLine($"Press any key when server {APIROOT} is ready.");
             Console.ReadKey();
             Console.Clear();
             Console.WriteLine("Console Client");
@@ -38,7 +38,7 @@ namespace ConsoleClient
         {
             Console.WriteLine("\nGET");
 
-            using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
+            using var httpClient = new HttpClient { BaseAddress = new Uri(APIROOT) };
             var result = httpClient.GetAsync("api/WeatherForecast").Result;
             var bytes = result.Content.ReadAsByteArrayAsync().Result;
             var data = MessagePackSerializer.Deserialize<List<WeatherForecast>>(bytes, ContractlessStandardResolver.Options);

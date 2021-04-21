@@ -9,7 +9,7 @@ namespace BlazorClient
     public class Program
     {
         // asp.net core url
-        const string APIROOT = "https://localhost:44335/";
+        const string APIROOT = "https://localhost:44321/";
 
         public static async Task Main(string[] args)
         {
