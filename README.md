@@ -73,7 +73,7 @@ The ASP.NET Core server must have the Blazor client address in its CORS allowed 
 
 *The Blazor client and the console client testing the implementation. To run, use Multiple startup projects as a Solution property.*
 
-https://github.com/harveytriana/MessagePackStudy/blob/master/an_mp.png
+![](https://github.com/harveytriana/MessagePackStudy/blob/master/an_mp.png)
 
 ### Flats
 
@@ -85,7 +85,7 @@ We gain high transmission efficiency, but we go out of the traditional way of do
 
 1. [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp)
 
-2. [https://msgpack.org/-lex.europa.eu(https://msgpack.org/)
+2. [https://msgpack.org](https://msgpack.org/)
 
 ---
 
