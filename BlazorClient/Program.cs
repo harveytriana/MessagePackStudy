@@ -8,7 +8,7 @@ namespace BlazorClient
 {
     public class Program
     {
-        // asp.net core url
+        // asp.net core url (MessagePackApi project)
         const string APIROOT = "https://localhost:44321/";
 
         public static async Task Main(string[] args)

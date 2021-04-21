@@ -16,8 +16,8 @@ namespace ConsoleClient
     {
         //! Run Multiple startup projects. 
 
-        // asp.net core url
-        const string APIROOT = "https://localhost:44321/";
+        // asp.net core url (MessagePackApi project)
+        const string APIROOT = "https://localhost:44320/";
 
         const string MEDIA_TYPE = "application/x-msgpack";
 
@@ -29,9 +29,14 @@ namespace ConsoleClient
             Console.Clear();
             Console.WriteLine("Console Client");
 
-            GetData();
-            GetData(1);
-            PostData();
+            try {
+                GetData();
+                GetData(1);
+                PostData();
+            }
+            catch (Exception e) {
+                Console.WriteLine("Exceptiion: " + e.Message);
+            }
         }
 
         private static void GetData()
@@ -50,7 +55,7 @@ namespace ConsoleClient
         {
             Console.WriteLine($"\nGET/{id}");
 
-            using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
+            using var httpClient = new HttpClient { BaseAddress = new Uri(APIROOT) };
             var result = httpClient.GetAsync($"api/WeatherForecast/{id}").Result;
             var bytes = result.Content.ReadAsByteArrayAsync().Result;
             var item = MessagePackSerializer.Deserialize<WeatherForecast>(bytes, ContractlessStandardResolver.Options);
@@ -64,7 +69,7 @@ namespace ConsoleClient
             // post object
             var item = new WeatherForecast(DateTime.Now, 17, "Cool in Bogotá");
 
-            using var httpClient = new HttpClient { BaseAddress = new Uri(_apiRoot) };
+            using var httpClient = new HttpClient { BaseAddress = new Uri(APIROOT) };
             var buffer = MessagePackSerializer.Serialize(item, ContractlessStandardResolver.Options);
             var byteContent = new ByteArrayContent(buffer);
             byteContent.Headers.ContentType = new MediaTypeHeaderValue(MEDIA_TYPE);
