@@ -70,7 +70,7 @@ namespace ConsoleClient
             byteContent.Headers.ContentType = new MediaTypeHeaderValue(MEDIA_TYPE);
             var result = httpClient.PostAsync("api/WeatherForecast", byteContent).Result;
 
-            Console.WriteLine("\nResult: {0}", result.StatusCode);
+            Console.WriteLine("\nResult: {0} (Look server log messages)", result.StatusCode);
         }
     }
 }

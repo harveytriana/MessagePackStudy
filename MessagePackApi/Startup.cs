@@ -38,7 +38,7 @@ namespace MessagePackApi
             services.AddCors(options => {
                 options.AddPolicy(name: _CorsPolicy,
                     builder => {
-                        builder.WithOrigins("https://localhost:44342")
+                        builder.WithOrigins("https://localhost:44342") // blazor sample
                                .AllowAnyHeader()
                                .AllowCredentials()
                                .AllowAnyMethod()
