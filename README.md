@@ -1,7 +1,5 @@
 ﻿# How to implement MessagePack ™ serialization from ASP.NET Core REST services
 
----
-
 *It is possible to implement a compact protocol in Web Api services to achieve higher performance in data transfer*
 
 One .NET way to send data in MessagePack serialization is through a SignalR server configured for that. On the other hand, if we want to program REST services for this format, the implementation is different. In this post I explain how to do it, and give an example for a Console client and for a Blazor client.
