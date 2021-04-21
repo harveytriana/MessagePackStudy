@@ -73,7 +73,7 @@ The ASP.NET Core server must have the Blazor client address in its CORS allowed 
 
 *The Blazor client and the console client testing the implementation. To run, use Multiple startup projects as a Solution property.*
 
-<img src="file:///C:/_study/Blog/Documents/Screens/an_mp.png" title="" alt="" data-align="center">
+https://github.com/harveytriana/MessagePackStudy/blob/master/an_mp.png
 
 ### Flats
 
