@@ -24,7 +24,7 @@ namespace MessagePackApi
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // the input and output will be in MessagePAch binary format
+            // the input and output will be in MessagePack binary format
             services.AddMvc().AddMvcOptions(option => {
                 option.OutputFormatters.Clear();
                 option.OutputFormatters.Add(new MessagePackOutputFormatter(ContractlessStandardResolver.Options));

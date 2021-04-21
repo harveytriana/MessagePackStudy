@@ -9,6 +9,9 @@ In an ASP.NET Core Web Api application, we install the `MessagePack.AspNetCoreMv
 *Startup*
 
 ```csharp
+using MessagePack.AspNetCoreMvcFormatter;
+using MessagePack.Resolvers;
+...
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddMvc().AddMvcOptions(option => {
