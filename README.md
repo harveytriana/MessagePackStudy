@@ -91,4 +91,4 @@ We gain high transmission efficiency, but we go out of the traditional way of do
 
 `Licencia MIT. Autor: Harvey Triana. Contacto: admin@blazorspread.net`
 
-*BlazorSpread.net Post*
+[https://www.BlazorSpread.net](https://www.BlazorSpread.net)
