@@ -5,6 +5,7 @@ using MessagePack.AspNetCoreMvcFormatter;
 using MessagePack.Resolvers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -47,7 +48,6 @@ namespace MessagePackApi
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) {
@@ -59,11 +59,15 @@ namespace MessagePackApi
             app.UseRouting();
             app.UseAuthorization();
             app.UseDefaultFiles();
-            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapControllers();
             });
+
+            app.Run(async context => {
+                await context.Response.WriteAsync("Server is ready.");
+            });
+
         }
     }
 }
